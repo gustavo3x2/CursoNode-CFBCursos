@@ -6,9 +6,16 @@ mongodb.connect(url,(erro,banco)=>{
   const dbo =  banco.db("cfbcursos")
   const obj = {curso:"Curso de Javascript",canal:"CFB Cursos"}
   const colecao = "cursos"
-  dbo.collection(colecao).insertOne(obj,(erro,resultado)=>{
+
+  /*dbo.collection(colecao).insertOne(obj,(erro,resultado)=>{
     if(erro)throw erro
     console.log("1 novo cuso inserido")
+    banco.close()
+  })*/
+
+  dbo.collection(colecao).find({canal: 'CFB Cursos'},{projection:{_id:0}}).toArray((erro,resultado)=>{
+    if(erro)throw erro
+    console.log(resultado[0])
     banco.close()
   })
 })
