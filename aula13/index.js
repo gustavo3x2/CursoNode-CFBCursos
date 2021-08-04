@@ -30,9 +30,30 @@ mongodb.connect(url,(erro,banco)=>{
   })*/
 
   //Sort ordena em ordem alfabetica 
-  const ordenacao = {curso:1}
+  /*const ordenacao = {curso:1}
   const query = {}
   dbo.collection(colecao).find(query).sort(ordenacao).toArray((erro,resultado)=>{
+    if(erro)throw erro
+    console.log(resultado)
+    banco.close()
+  })*/
+
+  // Deletar objeto da coleção
+  //let query = {curso: 'Curso de HTML'}
+
+  /*dbo.collection(colecao).deleteOne(query, (erro,resultado)=>{
+    if(erro)throw erro
+    console.log('1 curso deletado')
+  })*/
+  let query = {curso:/.t/}
+
+  dbo.collection(colecao).deleteMany(query, (erro,resultado)=>{
+    if(erro)throw erro
+    console.log('cursos deletados')
+  })
+
+  query = {}
+  dbo.collection(colecao).find(query,{projection:{_id:0}}).toArray((erro,resultado)=>{
     if(erro)throw erro
     console.log(resultado)
     banco.close()
