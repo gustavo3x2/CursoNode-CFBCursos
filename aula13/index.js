@@ -58,11 +58,36 @@ mongodb.connect(url,(erro,banco)=>{
   })*/
 
   // Delettar varios objetos da coleção
-  let query = {curso:/.t/}
+  /*let query = {curso:/.t/}
 
   dbo.collection(colecao).deleteMany(query,async (erro,resultado)=>{
     if(erro)throw erro
     await console.log(resultado.deletedCount + ' curso(s) deletado(s)')
+  })*/
+
+  // Mostrar a coleção
+  /*query = {}
+  dbo.collection(colecao).find(query,{projection:{_id:0}}).toArray((erro,resultado)=>{
+    if(erro)throw erro
+    console.log(resultado)
+    banco.close()
+  })*/
+
+  // Atualização de um objetos
+
+  let query = {curso: 'Curso de Javascript'}
+  let novoObj = {$set:{curso:'Curso de Javascript 2021'}}
+  /*dbo.collection(colecao).updateOne(query, novoObj, (erro,resultado)=>{
+    if(erro)throw erro
+    console.log('1 Curso atualizados')
+    //banco.close()
+  })*/
+
+  // Atualizar varios objetos
+  dbo.collection(colecao).updateMany(query, novoObj,async (erro,resultado)=>{
+    if(erro)throw erro
+    await console.log(resultado.modifiedCount +' Curso(s) atualizado(s)')
+    //banco.close()
   })
 
   query = {}
@@ -71,4 +96,6 @@ mongodb.connect(url,(erro,banco)=>{
     console.log(resultado)
     banco.close()
   })
+
+
 })
