@@ -15,9 +15,9 @@ mongodb.connect(url,(erro,banco)=>{
   })*/
 
   /*const obj = [
-    {curso:"Curso de Javascript",canal:"CFB Cursos"},
-    {curso:"Curso de Javascript",canal:"CFB Cursos"},
-    {curso:"Curso de Javascript",canal:"CFB Cursos"}
+    {curso:"Curso de Javascript 2021",canal:"CFB Cursos"},
+    {curso:"Curso de Javascript 2021",canal:"CFB Cursos"},
+    {curso:"Curso de Javascript 2021",canal:"CFB Cursos"}
   ]
   dbo.collection(colecao).insertMany(obj,async(erro,resultado)=>{
     if(erro)throw erro
@@ -75,8 +75,8 @@ mongodb.connect(url,(erro,banco)=>{
 
   // Atualização de um objetos
 
-  let query = {curso: 'Curso de Javascript'}
-  let novoObj = {$set:{curso:'Curso de Javascript 2021'}}
+  //let query = {curso: 'Curso de Javascript'}
+  //let novoObj = {$set:{curso:'Curso de Javascript 2021'}}
   /*dbo.collection(colecao).updateOne(query, novoObj, (erro,resultado)=>{
     if(erro)throw erro
     console.log('1 Curso atualizados')
@@ -84,14 +84,17 @@ mongodb.connect(url,(erro,banco)=>{
   })*/
 
   // Atualizar varios objetos
-  dbo.collection(colecao).updateMany(query, novoObj,async (erro,resultado)=>{
+  /*dbo.collection(colecao).updateMany(query, novoObj,async (erro,resultado)=>{
     if(erro)throw erro
     await console.log(resultado.modifiedCount +' Curso(s) atualizado(s)')
     //banco.close()
-  })
+  })*/
 
-  query = {}
-  dbo.collection(colecao).find(query,{projection:{_id:0}}).toArray((erro,resultado)=>{
+  //Exibe colection limitado
+  const query = {curso:/.t/}
+  const limite = 5
+  //query = {}
+  dbo.collection(colecao).find(query,{projection:{_id:0}}).limit(limite).toArray((erro,resultado)=>{
     if(erro)throw erro
     console.log(resultado)
     banco.close()
